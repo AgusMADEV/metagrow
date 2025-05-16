@@ -27,14 +27,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['import_step']) && $_P
             username TEXT,
             password TEXT
         )");
-        $check = $db->query("SELECT COUNT(*) as count FROM users WHERE username = 'jocarsa'");
+        $check = $db->query("SELECT COUNT(*) as count FROM users WHERE username = 'agusmadev'");
         $row = $check->fetchArray(SQLITE3_ASSOC);
         if ($row['count'] == 0) {
             $db->exec("INSERT INTO users (name, email, username, password) VALUES (
                 'Jose Vicente Carratala',
                 'info@josevicentecarratala.com',
-                'jocarsa',
-                'jocarsa'
+                'agusmadev',
+                'agusmadev'
             )");
         }
 
@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['import_step']) && $_P
 <body>
 <div class="header">
     <div id="corporativo">
-        <img src="grey.png" alt="Logo">
+        <img src="metagrow.png" alt="Logo">
         <h1><?php echo t("importer_title"); ?></h1>
     </div>
 </div>

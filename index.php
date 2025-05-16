@@ -45,13 +45,125 @@ if (!isset($_SESSION['loggedin'])) {
         <head>
             <meta charset="UTF-8">
             <title><?php echo t("login_title"); ?></title>
-            <link rel="stylesheet" href="style.css">
+            <style>
+                /* Global Styles */
+                @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+                :root {
+                    --primary-color: #3498db;
+                    --secondary-color: #2980b9;
+                    --accent-color: #e74c3c;
+                    --text-color: #333;
+                    --light-gray: #f5f5f5;
+                    --dark-gray: #333;
+                    --white: #ffffff;
+                    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                    --border-radius: 8px;
+                }
+
+                body {
+                    margin: 0;
+                    font-family: 'Roboto', sans-serif;
+                    background-color: var(--light-gray);
+                    color: var(--text-color);
+                    line-height: 1.6;
+                }
+
+                * {
+                    padding: 0;
+                    margin: 0;
+                    box-sizing: border-box;
+                }
+
+                /* Header */
+                .header {
+                    background-color: var(--primary-color);
+                    color: var(--white);
+                    padding: 15px 20px;
+                    text-align: center;
+                    font-size: 1.5em;
+                    box-shadow: var(--shadow);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .header h1 {
+                    font-size: 24px;
+                    margin-left: 10px;
+                }
+
+                #corporativo {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: nowrap;
+                    justify-content: center;
+                    align-items: center;
+                    align-content: stretch;
+                }
+
+                #corporativo img {
+                    width: 60px;
+                    margin-right: 20px;
+                }
+
+                /* Login/Register Styles */
+                .contenedorlogin {
+                    width: 100%;
+                    max-width: 400px;
+                    margin: 50px auto;
+                    padding: 20px;
+                    background-color: var(--white);
+                    border-radius: var(--border-radius);
+                    box-shadow: var(--shadow);
+                    text-align: center;
+                }
+
+                .contenedorlogin h2 {
+                    margin-bottom: 20px;
+                    color: var(--primary-color);
+                }
+
+                .contenedorlogin form {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                .contenedorlogin label {
+                    margin: 10px 0 5px;
+                    text-align: left;
+                    color: var(--dark-gray);
+                }
+
+                .contenedorlogin input[type="text"],
+                .contenedorlogin input[type="password"],
+                .contenedorlogin select {
+                    padding: 10px;
+                    margin-bottom: 15px;
+                    border: 1px solid #ccc;
+                    border-radius: var(--border-radius);
+                }
+
+                .contenedorlogin input[type="submit"] {
+                    padding: 10px;
+                    background-color: var(--primary-color);
+                    color: var(--white);
+                    border: none;
+                    border-radius: var(--border-radius);
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                }
+
+                .contenedorlogin input[type="submit"]:hover {
+                    background-color: var(--secondary-color);
+                }
+            </style>
         </head>
         <body>
             <div class="header">
                 <div id="corporativo">
-                    <img src="grey.png" alt="Logo">
-                    <h1>jocarsa | grey - <?php echo t("login_title"); ?></h1>
+                    <img src="metagrow.png" alt="Logo">
+                    <h1>agusmadev | metagrow - <?php echo t("login_title"); ?></h1>
                 </div>
             </div>
             <div class="container contenedorlogin">
@@ -63,10 +175,10 @@ if (!isset($_SESSION['loggedin'])) {
                     <form method="post" action="index.php">
                         <label><?php echo t("username"); ?>:</label>
                         <input type="text" name="username" required>
-                        
+
                         <label><?php echo t("password"); ?>:</label>
                         <input type="password" name="password" required>
-                        
+
                         <label>Language:</label>
                         <select name="lang">
                             <option value="en">English</option>
@@ -78,7 +190,7 @@ if (!isset($_SESSION['loggedin'])) {
                             <option value="ko">한국어</option>
                             <option value="zh">中文</option>
                         </select>
-                        
+
                         <input type="submit" name="login" value="<?php echo t("login_button"); ?>">
                     </form>
                 </div>
@@ -130,21 +242,144 @@ if (!isset($_SESSION['department_id']) && !isset($_POST['department_id'])) {
     <head>
         <meta charset="UTF-8">
         <title>Select Department</title>
-        <link rel="stylesheet" href="style.css">
+        <style>
+            /* Global Styles */
+            @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+            :root {
+                --primary-color: #3498db;
+                --secondary-color: #2980b9;
+                --accent-color: #e74c3c;
+                --text-color: #333;
+                --light-gray: #f5f5f5;
+                --dark-gray: #333;
+                --white: #ffffff;
+                --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                --border-radius: 8px;
+            }
+
+            body {
+                margin: 0;
+                font-family: 'Roboto', sans-serif;
+                background-color: var(--light-gray);
+                color: var(--text-color);
+                line-height: 1.6;
+            }
+
+            * {
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            }
+
+            /* Header */
+            .header {
+                background-color: var(--primary-color);
+                color: var(--white);
+                padding: 15px 20px;
+                text-align: center;
+                font-size: 1.5em;
+                box-shadow: var(--shadow);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .header h1 {
+                font-size: 24px;
+                margin-left: 10px;
+            }
+
+            #corporativo {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: center;
+                align-items: center;
+                align-content: stretch;
+            }
+
+            #corporativo img {
+                width: 60px;
+                margin-right: 20px;
+            }
+
+            /* Department Grid Container */
+            .department-grid-container {
+                display: grid;
+                gap: 20px;
+                max-width: 900px;
+                margin: 30px auto;
+                padding: 20px;
+            }
+
+            .department-grid-item {
+                background-color: var(--white);
+                border-radius: var(--border-radius);
+                padding: 20px;
+                text-align: center;
+                box-shadow: var(--shadow);
+                transition: transform 0.3s;
+            }
+
+            .department-grid-item:hover {
+                transform: translateY(-5px);
+            }
+
+            .department-button {
+                background-color: var(--primary-color);
+                color: var(--white);
+                border: none;
+                border-radius: var(--border-radius);
+                padding: 15px 20px;
+                cursor: pointer;
+                font-size: 1em;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                transition: background-color 0.3s;
+                width: 100%;
+            }
+
+            .department-button:hover {
+                background-color: var(--secondary-color);
+            }
+
+            .letra {
+                font-size: 90px;
+                font-weight: bold;
+                color: var(--primary-color);
+            }
+
+            /* Responsive Design */
+            @media (max-width: 768px) {
+                .container {
+                    flex-direction: column;
+                }
+
+                .nav {
+                    width: 100%;
+                    min-height: auto;
+                }
+
+                .department-grid-container {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
     </head>
     <body>
     <div class="header">
         <div id="corporativo">
-            <img src="grey.png" alt="Logo">
+            <img src="metagrow.png" alt="Logo">
             <h1>Select a Department</h1>
         </div>
     </div>
-    
-    <!-- 
-       We apply a dynamic inline style to define the grid-template-columns 
+
+    <!--
+       We apply a dynamic inline style to define the grid-template-columns
        according to $columns.
     -->
-    <div class="department-grid-container" 
+    <div class="department-grid-container"
          style="grid-template-columns: repeat(<?php echo $columns; ?>, 1fr);">
         <?php foreach ($departments as $dep): ?>
             <div class="department-grid-item">
@@ -258,18 +493,254 @@ if ($selected_table && $_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title><?php echo t("dashboard_title"); ?></title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Global Styles */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333;
+            --white: #ffffff;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 1.5em;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-left: 10px;
+        }
+
+        #corporativo {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+            align-content: stretch;
+        }
+
+        #corporativo img {
+            width: 60px;
+            margin-right: 20px;
+        }
+
+        /* Layout Container */
+        .container {
+            display: flex;
+            min-height: calc(100vh - 70px);
+        }
+
+        /* Navigation (Sidebar) */
+        .nav {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            width: 220px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: var(--white);
+        }
+
+        .nav a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+            border-radius: var(--border-radius);
+            transition: background-color 0.2s;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .nav a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .nav a.active {
+            background-color: var(--white);
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* Main Content Area */
+        .main {
+            flex: 1;
+            padding: 20px;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        /* Action Buttons */
+        .actions {
+            margin-bottom: 20px;
+        }
+
+        .btn, .boton {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s;
+            margin-right: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn:hover, .boton:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--light-gray);
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Forms */
+        form {
+            margin-bottom: 20px;
+        }
+
+        form label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: 500;
+            color: var(--dark-gray);
+        }
+
+        form input[type="text"],
+        form input[type="password"],
+        form textarea,
+        form select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        form input[type="submit"] {
+            padding: 10px 15px;
+            background-color: var(--primary-color);
+            border: none;
+            color: var(--white);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 14px;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Inline form for delete button */
+        form.inline {
+            display: inline;
+        }
+
+        /* Messages */
+        .message {
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .letra {
+            font-size: 90px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .nav {
+                width: 100%;
+                min-height: auto;
+            }
+
+            .department-grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <!-- Header -->
 <div class="header">
     <div id="corporativo">
-        <img src="grey.png" alt="Logo">
+        <img src="metagrow.png" alt="Logo">
         <h1><?php echo t("dashboard_title"); ?></h1>
     </div>
     <!-- Top-right: user info and logout -->
-    <div style="position:absolute; top:15px; right:20px; font-size:10px;">
+    <div style="position:absolute; top:15px; right:20px; font-size:14px;">
         <?php echo t("hello"); ?>, <?php echo htmlspecialchars($_SESSION['username']); ?>
         <a href="?action=logout" class="boton"><?php echo t("logout"); ?></a>
     </div>
@@ -287,12 +758,12 @@ if ($selected_table && $_SERVER['REQUEST_METHOD'] === 'POST') {
             </a>
         <?php endforeach; ?>
         <hr>
-        
+
         <!-- Optional: Let user “change department” by hitting a small script -->
         <form action="change_department.php" method="post">
             <input type="submit" class="btn boton" value="Change Department">
         </form>
-        
+
         <!-- Relaunch importer link -->
         <a href="importador.php" class="btn boton"><?php echo t("relaunch_importer"); ?></a>
     </div>
@@ -301,11 +772,11 @@ if ($selected_table && $_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="main">
         <?php if ($selected_table): ?>
             <h2><?php echo htmlspecialchars($selected_table); ?> Table</h2>
-            
+
             <?php if ($crud_message): ?>
                 <p class="message"><?php echo $crud_message; ?></p>
             <?php endif; ?>
-            
+
             <?php
             // Get column metadata
             $colsQuery = $db->query("PRAGMA table_info('$selected_table')");
@@ -322,7 +793,7 @@ if ($selected_table && $_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php foreach ($columns as $col):
                         if ($col['name'] === 'id') continue;
                         $colName = $col['name'];
-                        
+
                         if (isForeignKey($colName)) {
                             list($refTable, $displayCols) = parseForeignKey($colName);
                             ?>
@@ -331,7 +802,7 @@ if ($selected_table && $_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <option value="">-- Select --</option>
                                 <?php
                                 // Build a query to fetch ID + display columns from the referenced table
-                                $fkSql = "SELECT id, " 
+                                $fkSql = "SELECT id, "
                                        . implode(", ", array_map(fn($c) => "\"$c\"", $displayCols))
                                        . " FROM \"$refTable\"";
                                 $resultFK = $db->query($fkSql);
@@ -345,8 +816,8 @@ if ($selected_table && $_SERVER['REQUEST_METHOD'] === 'POST') {
                                 }
                                 ?>
                             </select>
-                        <?php 
-                        } else { 
+                        <?php
+                        } else {
                         ?>
                             <label><?php echo htmlspecialchars($colName); ?>:</label>
                             <input type="text" name="<?php echo htmlspecialchars($colName); ?>">
@@ -359,7 +830,7 @@ if ($selected_table && $_SERVER['REQUEST_METHOD'] === 'POST') {
                 </form>
 
             <!-- EDIT -->
-            <?php elseif ($action === 'edit' && isset($_GET['id'])): 
+            <?php elseif ($action === 'edit' && isset($_GET['id'])):
                 $id = $_GET['id'];
                 $stmt = $db->prepare("SELECT * FROM \"$selected_table\" WHERE id = :id LIMIT 1");
                 $stmt->bindValue(':id', $id, SQLITE3_TEXT);
@@ -369,11 +840,11 @@ if ($selected_table && $_SERVER['REQUEST_METHOD'] === 'POST') {
                     <h3><?php echo t("edit_record"); ?></h3>
                     <form method="post">
                         <input type="hidden" name="id" value="<?php echo htmlspecialchars($record['id']); ?>">
-                        
+
                         <?php foreach ($columns as $col):
                             if ($col['name'] === 'id') continue;
                             $colName = $col['name'];
-                            
+
                             if (isForeignKey($colName)) {
                                 list($refTable, $displayCols) = parseForeignKey($colName);
                                 ?>
@@ -381,12 +852,12 @@ if ($selected_table && $_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <select name="<?php echo htmlspecialchars($colName); ?>">
                                     <option value="">-- Select --</option>
                                     <?php
-                                    $fkSql = "SELECT id, " 
+                                    $fkSql = "SELECT id, "
                                             . implode(", ", array_map(fn($c) => "\"$c\"", $displayCols))
                                             . " FROM \"$refTable\"";
                                     $resultFK = $db->query($fkSql);
                                     while ($rowFK = $resultFK->fetchArray(SQLITE3_ASSOC)) {
-                                        $tmp = $rowFK; 
+                                        $tmp = $rowFK;
                                         unset($tmp['id']);
                                         $displayStr = implode(" ", $tmp);
                                         $selected = ($record[$colName] == $rowFK['id']) ? 'selected' : '';
@@ -396,22 +867,22 @@ if ($selected_table && $_SERVER['REQUEST_METHOD'] === 'POST') {
                                     }
                                     ?>
                                 </select>
-                            <?php 
-                            } else { 
+                            <?php
+                            } else {
                             ?>
                                 <label><?php echo htmlspecialchars($colName); ?>:</label>
-                                <input type="text" 
-                                       name="<?php echo htmlspecialchars($colName); ?>" 
+                                <input type="text"
+                                       name="<?php echo htmlspecialchars($colName); ?>"
                                        value="<?php echo htmlspecialchars($record[$colName]); ?>">
                             <?php } ?>
                         <?php endforeach; ?>
-                        
+
                         <input type="submit" name="update" value="<?php echo t("edit_record"); ?>">
                         <a href="?table=<?php echo urlencode($selected_table); ?>&action=list" class="btn">
                             <?php echo t("cancel"); ?>
                         </a>
                     </form>
-            <?php 
+            <?php
                 endif; // record check
             ?>
 
@@ -423,7 +894,7 @@ if ($selected_table && $_SERVER['REQUEST_METHOD'] === 'POST') {
                     </a>
                 </div>
                 <h3><?php echo t("records"); ?></h3>
-                
+
                 <table>
                     <tr>
                         <?php foreach ($columns as $col): ?>
@@ -441,7 +912,7 @@ if ($selected_table && $_SERVER['REQUEST_METHOD'] === 'POST') {
                             if (isForeignKey($colName)) {
                                 list($refTable, $displayCols) = parseForeignKey($colName);
                                 $stmtFK = $db->prepare("
-                                    SELECT " 
+                                    SELECT "
                                     . implode(", ", array_map(fn($c) => "\"$c\"", $displayCols))
                                     . " FROM \"$refTable\" WHERE id = :fkid
                                 ");
@@ -456,15 +927,15 @@ if ($selected_table && $_SERVER['REQUEST_METHOD'] === 'POST') {
                         echo "<td>";
                         echo "<a href='?table=$selected_table&action=edit&id={$rowData['id']}' class='boton'>Edit</a>";
                         ?>
-                        <form method="post" class="inline" 
-                              onsubmit="return confirm('<?php echo t("delete_record"); ?>');" 
+                        <form method="post" class="inline"
+                              onsubmit="return confirm('<?php echo t("delete_record"); ?>');"
                               style="display:inline;">
                             <input type="hidden" name="id" value="<?php echo htmlspecialchars($rowData['id']); ?>">
                             <input type="submit" name="delete" value="Delete">
                         </form>
                         <?php
                         echo "</td>";
-                        
+
                         // Métodos
                         echo "<td>";
                         foreach ($columns as $col) {
